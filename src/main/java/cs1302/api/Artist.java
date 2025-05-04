@@ -27,7 +27,7 @@ public class Artist {
     private int trackerCount;
 
     /** Number of upcoming events for artist. */
-    @SerializedName("upcoming_event+count")
+    @SerializedName("upcoming_event_count")
     private int upcomingEventCount;
 
 
@@ -44,7 +44,7 @@ public class Artist {
      * Gets the artists name.
      * @return artist name
      */
-    String getArtistName() {
+    public String getArtistName() {
         return name;
     }
 
@@ -97,7 +97,7 @@ public class Artist {
 
     @Override
     public String toString() {
-        return String.format("Artist[name=%, trackers=%d, upcomingEvents=%d]",
+        return String.format("Artist[name=%s, trackers=%d, upcomingEvents=%d]",
             name, trackerCount, upcomingEventCount);
     }
 } // artist
