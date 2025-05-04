@@ -1,7 +1,7 @@
 package cs1302.api;
 
 import java.util.Arrays;
-
+import com.google.gson.annotations.SerializedName;
 /**
  * Artist from BandsInTown API.
  * This class is used by Gson to parse JSON response from API.
@@ -16,22 +16,22 @@ public class Artist {
     private String url;
 
     /** URL to image. */
+    @SerializedName("image_url")
     private String imageUrl;
+
+    /** URL to FB page. */
+    @SerializedName("facebook_page_url")
+    private String facebookUrl;
 
     /** Number of users which track the artist. */
     private int trackerCount;
 
     /** Number of upcoming events for artist. */
+    @SerializedName("upcoming_event+count")
     private int upcomingEventCount;
 
-    /** Artist music genre. */
-    private String artistGenre;
 
-    /** Arist country of origin. */
-    private String countryOrigin;
 
-    /** Members of band. */
-    private String[] memberName;
 
     /**
      * Default Gson constructor.
@@ -81,28 +81,7 @@ public class Artist {
         return upcomingEventCount;
     }
 
-    /**
-     * Get genre.
-     * @return genre
-     */
-    public String getGenre() {
-        return artistGenre;
-    }
 
-    /** Gets country of origin.
-     * @return country of origin
-     */
-    public String getCountryOfOrigin() {
-        return countryOrigin;
-    }
-
-    /**
-     * Gets members.
-     * @return members if not null
-     */
-    public String[] getMembers() {
-        return memberName != null ? Arrays.copyOf(memberName, memberName.length) : null;
-    }
 
     // util methods
 
@@ -114,28 +93,11 @@ public class Artist {
         return upcomingEventCount > 0;
     }
 
-    /**
-     * Checks if artist is a band with more than one member.
-     * @return true if there are multiple members
-     */
-    public boolean isBand() {
-        return memberName != null && memberName.length > 1;
-    }
 
-    /**
-     * Gets display name for artist.
-     * @return formatted display name
-     */
-    public String getDisplayName() {
-        if (memberName != null && memberName.length > 0) {
-            return name + " (" + String.join(", ", memberName) + ")";
-        }
-        return name;
-    } // gpn
 
     @Override
     public String toString() {
-        return String.format("Artist[name=%, genre=%s, country=%s, trackers=%d, upcomingEvents=%d]",
-            name, artistGenre, countryOrigin, trackerCount, upcomingEventCount);
+        return String.format("Artist[name=%, trackers=%d, upcomingEvents=%d]",
+            name, trackerCount, upcomingEventCount);
     }
 } // artist
