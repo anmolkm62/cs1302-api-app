@@ -126,7 +126,7 @@ public class LastFMService {
                             }
                         }
                         if (artistObj.containsKey("url")) {
-                            artist.setUrl((String) artistObj.get("url");
+                            artist.setUrl((String) artistObj.get("url"));
                             }
                                 return artist;
                         }
@@ -163,10 +163,10 @@ public class LastFMService {
 
             if (response.statusCode() == 200) {
                 Map<String, Object> jsonResponse = gson.fromJson(response.body(), Map.class);
-                if(toptracks,containsKey("toptracks")) {
+                if(jsonResponse.containsKey("toptracks")) {
                     Map<String, Object> toptracks =
                         (<Map<String, Object>) jsonResponse.get("toptracks");
-                    if (troptracks.containsKey("track")
+                    if (toptracks.containsKey("track")
                     Object trackElement = toptracks.get("track");
                     List<Map<String, Object>> trackList;
 
@@ -174,7 +174,7 @@ public class LastFMService {
                     if (trackElement instanceof List) {
                         trackList = (List<Map<String, Object>>) trackElement;
                     } else {
-                        trackList = List.of(Map<String, Object>) trackElement;
+                        trackList = List.of((Map<String, Object>) trackElement);
                     }
 
                     String[] tracks = new String[trackList.size()];
@@ -187,7 +187,7 @@ public class LastFMService {
                 }
             }
             return new String[0];
-        } catch {IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             System.err.println("Error getting top tracks: " + e.getMessage());
             return new String[0];
         }
@@ -200,7 +200,7 @@ public class LastFMService {
      * @return list of tracks for all artists
      */
     @SuppressWarnings("unchecked")
-    public String[] getSimilarArtists(String artistName) {
+    public String[] getSimilarArtists(String artistN) {
         enforceRateLimit();
 
         try {
@@ -208,7 +208,7 @@ public class LastFMService {
             String url = BASE_URL + "?method=artist.getsimilar&artist=" + encodedName +
                   "&api_key=" + apiKey + "&format=json&limit=5";
 
-            HttpRequest reqiest = HttpRequest.newBuilder()
+            HttpRequest request= HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .build();
@@ -217,7 +217,7 @@ public class LastFMService {
             if (response.statusCode() == 200) {
                 Map<String, Object> jsonResponse = gson.fromJson(response.body(), Map.class);
                 if (jsonResponse.containsKey("similarartists")) {
-                    List<Map<String, Object>>) similarArtists =
+                    List<Map<String, Object>> similarArtists =
                                                    (Map<String, Object>)
                                                    jsonResponse.get("similarartists");
                 if (similarArtists.containsKey("artists")) {
@@ -244,14 +244,14 @@ public class LastFMService {
      * @param artistNames array of artist names
      * @return list of tracks per artist
      */
-    @SurpressWarning("unchecked")
+    @SupressWarning("unchecked")
     public List<String> getTracksForMultipleArtists(String[] artistNames) {
         List<String> allTracks = new ArrayList<>();
 
         for (String artistN : artistNames) {
             String[] tracks = getTopTracks(artistN);
             for (String track : tracks) {
-                allTracks.add(artistsN + "-" + track);
+                allTracks.add(artistN + "-" + track);
             }
         }
         return allTracks;
@@ -269,8 +269,8 @@ public class LastFMService {
             return null;
         }
 
-        String [] topTracks = getTopTracks(artistN);
-        String[] similarArtist = getSimilarArtists(artistN);
+        String [] topTracks = getTopTracks(artistName);
+        String[] similarArtist = getSimilarArtists(artistName);
 
         return new ArtistWithDetails(artist, topTracks, similarArtists);
     }
@@ -297,7 +297,7 @@ public class LastFMService {
             return topTracks;
         }
 
-        public String90 getSimilarArtists() {
+        public String[] getSimilarArtists() {
             return similarArtists;
         }
     }
