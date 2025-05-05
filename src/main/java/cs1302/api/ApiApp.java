@@ -267,7 +267,7 @@ public class ApiApp extends Application {
 
     /**
      * Handles meal selection then retrieves music.
-     * @param selectedDis selected meal object
+     * @param selectedDish selected meal object
      */
     private void selectMeal(Meal selectedDish) {
         chosenRecipe = selectedDish;
@@ -278,7 +278,7 @@ public class ApiApp extends Application {
         Runnable musicSearchTask = () -> {
             ITunesResponse musicSearch = null;
             if (selectedDish.getCuisineArea() !=
-            null && !selectedDish.getCuisineArea().equalsIgnoreCase("Unknown")) {
+                null && !selectedDish.getCuisineArea().equalsIgnoreCase("Unknown")) {
                 musicSearch = musicService.searchMusic(selectedDish.getCuisineArea());
             } // if
             final ITunesResponse foundMusic = musicSearch;
@@ -287,9 +287,9 @@ public class ApiApp extends Application {
                 loadingIndicator.setProgress(0);
                 displayMealandMusic(selectedDish, foundMusic);
 
-                if (foundMusic != null && foundMusic.getResults() !- null) {
+                if (foundMusic != null && foundMusic.getResults() != null) {
                     statusMessage.setText("Found " +
-                    foundMusic.getResults().length + " music tracks.");
+                        foundMusic.getResults().length + " music tracks.");
                 } else {
                     statusMessage.setText("No music found.");
                 } // if
@@ -325,7 +325,7 @@ public class ApiApp extends Application {
         cookingInstructionsArea.getPrefHeight(150);
 
         recipeDetailsPanel.getChildren().addAll(dishNameLabel,
-        cuisineTypeLabel, foodCategoryLabel, instructionsLabel, cookingInstructionsArea);
+            cuisineTypeLabel, foodCategoryLabel, instructionsLabel, cookingInstructionsArea);
 
         // music pane;
         musicPlaylistPanel.getChildren().clear();
