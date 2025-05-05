@@ -94,7 +94,7 @@ public class ITunesResult {
      * Get artwork url.
      * @return artworkUrl
      */
-    public String getArtWorkUrl() {
+    public String getArtworkUrl() {
         return artworkUrl;
     }
 
