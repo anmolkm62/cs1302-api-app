@@ -41,6 +41,11 @@ public class ApiApp extends Application {
     private ITunesResult[] matchingTracks;
     private String activeScreen;
 
+
+
+
+
+
     /**
      * Initialized application with components (step 2 of JFX LC).
      * Constructs an {@code ApiApp} object.
@@ -376,6 +381,25 @@ public class ApiApp extends Application {
             musicPlaylistPanel.getChildren().addAll(musicHeading, noMusic);
         } // if
     } //dmam
+
+    /**
+     * Checks if input if valid.
+     * @param query
+     * @return false if false
+     */
+    private boolean isValidFoodQuery(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return false;
+        }
+        query = query.trim();
+
+        // check length
+        if (query.length() < 2 || query.length() > 50) {
+            return false;
+        }
+        return query.matches("^a-zA-Z\\s]+$");
+    } // IVFQ
+
 
     /**
      * Shows error.
