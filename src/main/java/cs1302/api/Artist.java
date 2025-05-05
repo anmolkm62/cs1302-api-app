@@ -24,6 +24,7 @@ public class Artist {
     private String facebookUrl;
 
     /** Number of users which track the artist. */
+    @SerializedName("tracker_count")
     private int trackerCount;
 
     /** Number of upcoming events for artist. */

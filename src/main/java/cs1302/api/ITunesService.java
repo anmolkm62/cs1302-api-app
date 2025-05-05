@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * Class to interact with iTunes search API.
  */
 
-public class ItunesService {
+public class ITunesService {
 
     /** Base url for itunes search api. */
     private static final String BASE_URL =  "https://itunes.apple.com/search";
@@ -29,7 +29,7 @@ public class ItunesService {
     /**
      * Constructor for iTunes service.
      */
-    public ItunesService() {
+    public ITunesService() {
         this.httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .followRedirects(HttpClient.Redirect.NORMAL)
@@ -44,7 +44,7 @@ public class ItunesService {
      * @param term search term
      * @return ItunesResponse object
      */
-    public ItunesResponse searchMusic (String term) {
+    public ITunesResponse searchMusic (String term) {
         try {
             String encodedTerm = URLEncoder.encode(term, StandardCharsets.UTF_8);
             String url = BASE_URL + "?term=" + encodedTerm + "&media=music&entity=song&limit=20";
@@ -54,7 +54,7 @@ public class ItunesService {
                 .header("Accept", "application/json")
                 .build();
 
-            HttpResponse<String> response = httpClient.send(request, BodyHandlers.pfString());
+            HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 return gson.fromJson(response.body(), ITunesResponse.class);
             } // if
