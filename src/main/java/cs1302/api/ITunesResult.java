@@ -25,15 +25,15 @@ public class ITunesResult {
 
     /** Preview of URL. */
     @SerializedName("previewUrl")
-    private String previewUrlr;
+    private String previewUrl;
 
     /** Artwork url. */
-    @SerializedName("artowkrUrl100")
+    @SerializedName("artworkUrl100")
     private String artworkUrl;
 
     /** Track time in MS. */
     @SerializedName("trackTimeMillis")
-    private String trackTimeMillis;
+    private int trackTimeMillis;
 
     /** Primary genre. */
     @SerializedName("primaryGenreName")
@@ -87,6 +87,14 @@ public class ITunesResult {
      * @return artworkURL
      */
     public String getPreviewUrl() {
+        return previewUrl;
+    }
+
+    /**
+     * Get artwork url.
+     * @return artworkUrl
+     */
+    public String getArtWorkUrl() {
         return artworkUrl;
     }
 
