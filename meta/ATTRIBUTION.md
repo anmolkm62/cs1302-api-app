@@ -17,26 +17,26 @@ My project does not use any local images or sounds. I used only JavaFX and CSS S
 > instead of leaving the license information blank.
 
 * TheMealDB API
-    Free tier acess
-    TheMealDBTeam. 2024.
-    https://www.themealdb.com/
-    License Free for non commerical use with attribution
+    >Free tier acess
+    >TheMealDBTeam. 2024.
+    >https://www.themealdb.com/
+    >License Free for non commerical use with attribution
 
 * iTunes Search API
-    Public API access
-    Apple Inc, 2024.
-    https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/
-    License: Public use permitted
+   > Public API access
+  >  Apple Inc, 2024.
+ >   https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/
+>    License: Public use permitted
 
-    Libraries:
-    Gson JSON Library
-    Google. 2024.
-    https://github.com/google/gson
-License: Apache License 2.0
+    >Libraries:
+   > Gson JSON Library
+  >  Google. 2024.
+ >   https://github.com/google/gson
+>License: Apache License 2.0
 
 
 
-    JavaFX
-    Oracle Corporation. 2024.
-https://openjfx.io/
-License: GPL v2 with Classpath Exception
+  >  JavaFX
+ >   Oracle Corporation. 2024.
+>https://openjfx.io/
+>License: GPL v2 with Classpath Exception
