@@ -118,7 +118,7 @@ public class LastFMService {
                             for (Map<String, Object> img : images) {
                                 if (img.containsKey("size") && img.get("size").equals("large")) {
                                     if (img.containsKey("#text")) {
-                                        artist.setImageUrl((String img.get("#text"));
+                                        artist.setImageUrl((String) img.get("#text"));
                                         break;
                                         }
                                     }
@@ -165,8 +165,8 @@ public class LastFMService {
                 Map<String, Object> jsonResponse = gson.fromJson(response.body(), Map.class);
                 if(jsonResponse.containsKey("toptracks")) {
                     Map<String, Object> toptracks =
-                        (<Map<String, Object>) jsonResponse.get("toptracks");
-                    if (toptracks.containsKey("track")
+                        (Map<String, Object>) jsonResponse.get("toptracks");
+                    if (toptracks.containsKey("track"))
                     Object trackElement = toptracks.get("track");
                     List<Map<String, Object>> trackList;
 
@@ -217,10 +217,10 @@ public class LastFMService {
             if (response.statusCode() == 200) {
                 Map<String, Object> jsonResponse = gson.fromJson(response.body(), Map.class);
                 if (jsonResponse.containsKey("similarartists")) {
-                    List<Map<String, Object>> similarArtists =
+                    <Map<String, Object>> similarArtists =
                                                    (Map<String, Object>)
                                                    jsonResponse.get("similarartists");
-                if (similarArtists.containsKey("artists")) {
+                if (similarArtists.containsKey("artist")) {
                     List<Map<String, Object>> artistList =
                         (List<Map<String, Object>>) similarArtists.get("artist");
                     String[] artists = new String[artistList.size()];
@@ -244,7 +244,7 @@ public class LastFMService {
      * @param artistNames array of artist names
      * @return list of tracks per artist
      */
-    @SupressWarning("unchecked")
+    @SuppressWarnings("unchecked")
     public List<String> getTracksForMultipleArtists(String[] artistNames) {
         List<String> allTracks = new ArrayList<>();
 
@@ -270,7 +270,7 @@ public class LastFMService {
         }
 
         String [] topTracks = getTopTracks(artistName);
-        String[] similarArtist = getSimilarArtists(artistName);
+        String[] similarArtists = getSimilarArtists(artistName);
 
         return new ArtistWithDetails(artist, topTracks, similarArtists);
     }
