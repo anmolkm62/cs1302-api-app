@@ -61,7 +61,7 @@ public class ApiApp extends Application {
     public void start(Stage appWindow) {
         this.appWindow = appWindow;
         this.appWindow.setTitle("The Taste of Music!");
-        this.appScene = new Scene(mainLayout, 1280, 720);
+        this.appScene = new Scene(mainLayout, 900, 600);
         this.appWindow.setScene(appScene);
         this.appWindow.setResizable(false);
         this.appWindow.sizeToScene();
@@ -140,7 +140,7 @@ public class ApiApp extends Application {
 
         // music panel
         musicPlaylistPanel = new VBox();
-        musicPlaylistPanel.setPrefWidth(600);
+        musicPlaylistPanel.setPrefWidth(500);
         musicPlaylistPanel.setSpacing(10);
 
         resultsDisplayArea.getChildren().addAll(recipeDetailsPanel, musicPlaylistPanel);
@@ -178,7 +178,7 @@ public class ApiApp extends Application {
             "How to navigate:\n" +
             "Step 1: Enter a food name in search bar above\n" +
             "Step 2: Browse through and find a recipe you like\n" +
-            "Step 3: Chose your recipe and find your music to match!\n" +
+            "Step 3: Chose your recipe, click on it and find your music to match!\n" +
             "Enjoy!");
         instructionLabel.setStyle("-fx-font-size: 16px;");
         instructionLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
