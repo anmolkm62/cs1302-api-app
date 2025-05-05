@@ -41,6 +41,10 @@ public class ApiApp extends Application {
     private ITunesResult[] matchingTracks;
     private String activeScreen;
 
+    /**
+     * Initialized application with components (step 2 of JFX LC).
+     * Constructs an {@code ApiApp} object.
+     */
     public void init() {
         this.mainLayout = new BorderPane();
         this.foodService = new MealDBService();
@@ -61,7 +65,7 @@ public class ApiApp extends Application {
     public void start(Stage appWindow) {
         this.appWindow = appWindow;
         this.appWindow.setTitle("The Taste of Music!");
-        this.appScene = new Scene(mainLayout, 900, 600);
+        this.appScene = new Scene(mainLayout, 1200, 700);
         this.appWindow.setScene(appScene);
         this.appWindow.setResizable(false);
         this.appWindow.sizeToScene();
@@ -161,6 +165,9 @@ public class ApiApp extends Application {
         mainLayout.setBottom(footerBox);
     } // create footer
 
+    /**
+     * Creates home page with instructions to navigate app.
+     */
     private void showHomePage() {
         activeScreen = "home";
         resultsDisplayArea.setVisible(false);
@@ -174,20 +181,22 @@ public class ApiApp extends Application {
         welcomeLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
 
         Label instructionLabel = new Label(
-            "Discover recipes across the world and music to go with it!\n\n" +
-            "How to navigate:\n" +
-            "Step 1: Enter a food name in search bar above\n" +
-            "Step 2: Browse through and find a recipe you like\n" +
-            "Step 3: Chose your recipe, click on it and find your music to match!\n" +
-            "Enjoy!");
+            "        Discover recipes across the world and music to go with it!\n\n" +
+            "        How to navigate:\n" +
+            "        Step 1: Enter a food name in search bar above\n" +
+            "        Step 2: Browse through and find a recipe you like\n" +
+            "          Step 3: Choose your recipe, click on it and find your music to match!\n" +
+            "        Enjoy!");
         instructionLabel.setStyle("-fx-font-size: 16px;");
         instructionLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         instructionLabel.setWrapText(true);
-        instructionLabel.setMaxWidth(750);
+        instructionLabel.setMaxWidth(700);
+
 
         homePage.getChildren().addAll(welcomeLabel, instructionLabel);
         mainContentContainer.getChildren().clear();
         mainContentContainer.getChildren().add(homePage);
+
     } // showHomePage
 
     /**
@@ -337,7 +346,7 @@ public class ApiApp extends Application {
         musicHeading.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
         if (foundMusicResults != null && foundMusicResults.getResults() != null &&
-        foundMusicResults.getResults().length > 0) {
+            foundMusicResults.getResults().length > 0) {
             ScrollPane playlistScrollPane = new ScrollPane();
             playlistScrollPane.setFitToWidth(true);
             playlistScrollPane.setPrefHeight(350);
@@ -363,7 +372,7 @@ public class ApiApp extends Application {
             musicPlaylistPanel.getChildren().addAll(musicHeading, playlistScrollPane);
         } else {
             Label noMusic = new Label("No relevant music found for " +
-            dishToDisplay.getCuisineArea());
+                dishToDisplay.getCuisineArea());
             musicPlaylistPanel.getChildren().addAll(musicHeading, noMusic);
         } // if
     } //dmam

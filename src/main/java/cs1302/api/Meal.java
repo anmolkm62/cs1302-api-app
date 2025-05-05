@@ -40,26 +40,49 @@ public class Meal {
         //
     }
 
+    /** Getter for MealID.
+     * @return mealId id for meal
+     */
     public String getMealId() {
         return mealId;
     }
 
+    /**
+     * Getter for meal name.
+     * @return mealName name of meal
+     */
     public String getMealName() {
         return mealName;
     }
 
+    /**
+     * Getter for meal category.
+     * @return mealCategory category of meal
+     */
     public String getMealCategory() {
         return mealCategory;
     }
 
+    /**
+     * Getter for cuisine area.
+     * @return cuisineArea area of cuisine
+     */
     public String getCuisineArea() {
         return cuisineArea;
     }
 
+    /**
+     * Getter for instructions.
+     * @return instruct intructions
+     */
     public String getInstruct() {
         return instruct;
     }
 
+    /**
+     * Getter for tnurl.
+     * @return tnUrl url for thumbnail
+     */
     public String geTnUrl() {
         return tnUrl;
     }

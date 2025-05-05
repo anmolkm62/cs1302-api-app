@@ -19,7 +19,7 @@ public class ITunesResponse {
      */
     public ITunesResponse() {
      //
-     }
+    }
 
     /**
      * Returns result count.

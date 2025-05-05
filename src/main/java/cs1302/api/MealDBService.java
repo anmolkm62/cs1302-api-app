@@ -12,7 +12,7 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Class interacts with TheMealDb API;
+ * Class interacts with TheMealDb API.
  */
 public class MealDBService {
 
@@ -34,7 +34,7 @@ public class MealDBService {
             .followRedirects(HttpClient.Redirect.NORMAL)
             .build();
 
-          this.gson = new GsonBuilder()
+        this.gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
     }
@@ -70,7 +70,7 @@ public class MealDBService {
     } // search meals by name
 
     /**
-     * Gets meals based off of categories/
+     * Gets meals based off of categories.
      * @param category the category of food
      * @return array of different meal objects if found else null
      */
