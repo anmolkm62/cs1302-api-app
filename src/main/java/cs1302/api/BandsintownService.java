@@ -54,13 +54,13 @@ public class BandsintownService {
                  .header("Accept", "application/json")
                  .build();
 
-            HttpResponse<String> response = client.send(requestHttp, BodyHandlers.ofString());
+            HttpResponse<String> response = clientHttp.send(requestHttp, BodyHandlers.ofString());
 
-            if (response.statusCOde() == 200) {
+            if (response.statusCode() == 200) {
                 return gson.fromJson(response.body(), Artist.class);
             }
             return null;
-        } catch (IOEXCEPTION | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             System.err.println("Error retrieving artist data: " + e.getMessage());
             return null;
         }
