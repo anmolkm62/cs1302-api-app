@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.concurrent.Task;
+import javafx.geometry.Pos;
 
 /**
  * This App is a culinary music app! It allows users to browse different recipes,
@@ -32,7 +33,7 @@ public class ApiApp extends Application {
     private Label statusMessage;
     private HBox resultsDisplayArea;
     private VBox recipeDetailsPanel;
-    private VBox recipeDetailsPanel;
+    private VBox musicPlaylistPanel;
     private ImageView dishPhotoView;
 
     // current state of app
@@ -44,6 +45,8 @@ public class ApiApp extends Application {
         this.mainLayout = new BorderPane();
         this.foodService = new MealDBService();
         this.musicService = new ITunesService();
+
+        createUI();
     } // init
     /**
      * Constructs an {@code ApiApp} object. This default (i.e., no argument)
@@ -234,7 +237,7 @@ public class ApiApp extends Application {
         activeScreen = "results";
         resultsDisplayArea.setVisible(true);
 
-        VBox foundRecipesContainer = new Vbox();
+        VBox foundRecipesContainer = new VBox();
         foundRecipesContainer.setAlignment(Pos.TOP_CENTER);
         foundRecipesContainer.setSpacing(10);
         foundRecipesContainer.setPadding(new Insets(20));
@@ -285,7 +288,7 @@ public class ApiApp extends Application {
             Platform.runLater(() -> {
                 loadingIndicator.setVisible(false);
                 loadingIndicator.setProgress(0);
-                displayMealandMusic(selectedDish, foundMusic);
+                displayMealAndMusic(selectedDish, foundMusic);
 
                 if (foundMusic != null && foundMusic.getResults() != null) {
                     statusMessage.setText("Found " +
@@ -322,7 +325,7 @@ public class ApiApp extends Application {
         TextArea cookingInstructionsArea = new TextArea(dishToDisplay. getInstruct());
         cookingInstructionsArea.setWrapText(true);
         cookingInstructionsArea.setEditable(false);
-        cookingInstructionsArea.getPrefHeight(150);
+        cookingInstructionsArea.setPrefHeight(150);
 
         recipeDetailsPanel.getChildren().addAll(dishNameLabel,
             cuisineTypeLabel, foodCategoryLabel, instructionsLabel, cookingInstructionsArea);
@@ -356,17 +359,18 @@ public class ApiApp extends Application {
                 trackList.getChildren().add(trackItemBox);
             } // for
 
-            playlistScrollPane.setContent(tracksList);
+            playlistScrollPane.setContent(trackList);
             musicPlaylistPanel.getChildren().addAll(musicHeading, playlistScrollPane);
         } else {
             Label noMusic = new Label("No relevant music found for " +
             dishToDisplay.getCuisineArea());
+            musicPlaylistPanel.getChildren().addAll(musicHeading, noMusic);
         } // if
     } //dmam
 
     /**
      * Shows error.
-     * @param diaglogHeading error error title
+     * @param dialogHeading error error title
      * @param errorDetails error message
      */
     private void showError(String dialogHeading, String errorDetails) {
