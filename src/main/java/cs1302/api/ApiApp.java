@@ -41,7 +41,7 @@ public class ApiApp extends Application {
     private String activeScreen;
 
     public void init() {
-        this.mainLayout = new BoredrPane;
+        this.mainLayout = new BorderPane();
         this.foodService = new MealDBService();
         this.musicService = new ITunesService();
     } // init
@@ -111,7 +111,7 @@ public class ApiApp extends Application {
         loadingIndicator.setPrefWidth(500);
         loadingIndicator.setVisible(false);
 
-        topSectionBox.getChildren().addAll(appHeading, searchInputArea. loadingIndicator);
+        topSectionBox.getChildren().addAll(appHeading, searchInputArea, loadingIndicator);
         mainLayout.setTop(topSectionBox);
     } // header
 
@@ -232,7 +232,7 @@ public class ApiApp extends Application {
      */
     private void displaySearchResults(Meal[] foundRecipes) {
         activeScreen = "results";
-        resultsDisplayArea.setVisble(true);
+        resultsDisplayArea.setVisible(true);
 
         VBox foundRecipesContainer = new Vbox();
         foundRecipesContainer.setAlignment(Pos.TOP_CENTER);
@@ -252,7 +252,7 @@ public class ApiApp extends Application {
             Button recipeButton = new Button(recipe.getTitle());
             recipeButton.setPrefWidth(500);
             recipeButton.setOnAction(e -> selectMeal(recipe));
-            recipesListConatiner.getChildren().add(recipeButton);
+            recipesListContainer.getChildren().add(recipeButton);
         } // for
 
         recipesScrollArea.setContent(recipesListContainer);
@@ -276,12 +276,12 @@ public class ApiApp extends Application {
         loadingIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
 
         Runnable musicSearchTask = () -> {
-            ITunesRespnse musicSearch = null;
+            ITunesResponse musicSearch = null;
             if (selectedDish.getCuisineArea() !=
             null && !selectedDish.getCuisineArea().equalsIgnoreCase("Unknown")) {
                 musicSearch = musicService.searchMusic(selectedDish.getCuisineArea());
             } // if
-            final ITunesResponse foundMusic = musicSearch
+            final ITunesResponse foundMusic = musicSearch;
             Platform.runLater(() -> {
                 loadingIndicator.setVisible(false);
                 loadingIndicator.setProgress(0);
@@ -291,14 +291,14 @@ public class ApiApp extends Application {
                     statusMessage.setText("Found " +
                     foundMusic.getResults().length + " music tracks.");
                 } else {
-                    statusMessage.setTest("No music found.");
+                    statusMessage.setText("No music found.");
                 } // if
             });
         };
 
         Thread musicWorker = new Thread(musicSearchTask);
         musicWorker.setDaemon(true);
-        musicWorker.start(true);
+        musicWorker.start();
     } // selectMeal
 
     /**
@@ -348,18 +348,18 @@ public class ApiApp extends Application {
                 Label songName = new Label(song.getTrackName());
                 songName.setStyle("-fx-font-weight: bold;");
 
-                Lable artistName = new Label("Artist: " + song.getArtistName());
+                Label artistName = new Label("Artist: " + song.getArtistName());
                 Label albumName = new Label("Album: " + song.getCollectionName());
                 Label duration = new Label("Duration: " + song.getTrackDuration());
 
-                trackItemBox.getChildren().addAll(songName, artistName,albumName, duration);
-                trackList.getChildrem().add(trackItemBox);
+                trackItemBox.getChildren().addAll(songName, artistName, albumName, duration);
+                trackList.getChildren().add(trackItemBox);
             } // for
 
             playlistScrollPane.setContent(tracksList);
             musicPlaylistPanel.getChildren().addAll(musicHeading, playlistScrollPane);
         } else {
-            Label noMusic = new Label("No relevant music foumd for " +
+            Label noMusic = new Label("No relevant music found for " +
             dishToDisplay.getCuisineArea());
         } // if
     } //dmam
