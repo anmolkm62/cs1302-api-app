@@ -29,4 +29,69 @@ public class BandsintownService {
      * Constructor.
      */
 
-    public Bandsintown
+    public BandsintownService() {
+        this.clientHttp = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_2)
+            .followRedirects(HttpClient.Redirect.NORMAL)
+            .build();
+        this.gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
+    }
+
+    /**
+     * Returns artist info from Bandsintown API.
+     * @param artistN the name of artist
+     * @return Artist object or null if failed to find
+     */
+    public Artist getArtist(String artistN) {
+        try {
+            String encodedName = URLEncoder.encode(artistN, StandardCharsets.UTF_8);
+            String url = BASE_URL + encodedName;
+
+            HttpRequest requestHttp = HttpRequest.newBuilder()
+                 .uri(URI.create(url))
+                 .header("Accept", "application/json")
+                 .build();
+
+            HttpResponse<String> response = client.send(requestHttp, BodyHandlers.ofString());
+
+            if (response.statusCOde() == 200) {
+                return gson.fromJson(response.body(), Artist.class);
+            }
+            return null;
+        } catch (IOEXCEPTION | InterruptedException e) {
+            System.err.println("Error retrieving artist data: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Returns upcoming events for a specific artist.
+     * @param artistN the name of artist
+     * @return array of EVent obj or null if failed to find
+     */
+    public Event[] getArtistEvents(String artistN) {
+        try {
+            String encodedName = URLEncoder.encode(artistN, StandardCharsets. UTF_8);
+            String url = BASE_URL + encodedName + "/events";
+
+            HttpRequest requestHttp = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Accept", "application.json")
+                .build();
+
+            HttpResponse<String> response = clientHttp.send(requestHttp, BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                return gson.fromJson(response.body(), Event[].class);
+            }
+            return null;
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Error getting events data: " + e.getMessage());
+                return null;
+        }
+    }
+
+
+}
