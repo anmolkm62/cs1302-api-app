@@ -72,7 +72,7 @@ public class ITunesService {
      * @param country ISO country code
      * @return ITunes response obj
      */
-    public ITunesResponse searchMusicByCountryAndGenre(String term, String country) {
+    public ITunesResponse searchMusicByCountry(String term, String country) {
         try {
             String encodedTerm = URLEncoder.encode(term, StandardCharsets.UTF_8);
             String url = BASE_URL + "?term=" + encodedTerm +
