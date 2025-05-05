@@ -40,7 +40,7 @@ public class ITunesService {
     } // its
 
     /**
-     * Searches for songs by term in genre or country.
+     * Searches for songs by term.
      * @param term search term
      * @return ItunesResponse object
      */
@@ -57,7 +57,9 @@ public class ITunesService {
             HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 return gson.fromJson(response.body(), ITunesResponse.class);
-            } // if
+            }
+            return null;
+
         } catch (IOException | InterruptedException e) {
             System.err.println("Error searching iTunes: " + e.getMessage());
             return null;
@@ -67,21 +69,15 @@ public class ITunesService {
     /**
      * Search for music via genre and country.
      * @param term search term
-     * @param country country code
-     * @param genre music genre
+     * @param country ISO country code
      * @return ITunes response obj
      */
-    public ITunesResponse searchMusicByCountryAndGenre(String term, String country, String genre) {
+    public ITunesResponse searchMusicByCountryAndGenre(String term, String country) {
         try {
             String encodedTerm = URLEncoder.encode(term, StandardCharsets.UTF_8);
             String url = BASE_URL + "?term=" + encodedTerm +
                         "&media=music&entity=song&limit=20" +
                         "&country=" + country;
-            // if specified then add the genre
-            if (genre != null && !genre.isEmpty()) {
-                String encodedGenre = URLEncoder.encode(genre, StandardCharsets.UTF_8);
-                 url += "&genreId=" + getGenreId(genre);
-            }
 
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -89,12 +85,12 @@ public class ITunesService {
                 .build();
             HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
 
-             if (response.statusCode() == 200) {
+            if (response.statusCode() == 200) {
                 return gson.fromJson(response.body(), ITunesResponse.class);
             }
-             return null;
+            return null;
         } catch (IOException | InterruptedException e) {
-            System.err.println("Error searching iTunes by country/genre: " + e.getMessage());
+            System.err.println("Error searching iTunes by country: " + e.getMessage());
             return null;
         }
     }
