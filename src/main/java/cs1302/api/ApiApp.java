@@ -215,6 +215,12 @@ public class ApiApp extends Application {
             return;
         } // if
 
+        // only letters allowed
+        if (!isValidFoodQuery(userQuery)) {
+            showError("Invalid Input", "Please enter letters only for food name.");
+            return;
+        } // if
+
         activeScreen = "search";
         loadingIndicator.setVisible(true);
         loadingIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
@@ -384,8 +390,8 @@ public class ApiApp extends Application {
 
     /**
      * Checks if input if valid.
-     * @param query
-     * @return false if false
+     * @param query food search query
+     * @return false if false true is true
      */
     private boolean isValidFoodQuery(String query) {
         if (query == null || query.trim().isEmpty()) {
@@ -397,7 +403,7 @@ public class ApiApp extends Application {
         if (query.length() < 2 || query.length() > 50) {
             return false;
         }
-        return query.matches("^a-zA-Z\\s]+$");
+        return query.matches("[a-zA-Z\\s]+$");
     } // IVFQ
 
 
