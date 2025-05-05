@@ -8,14 +8,7 @@ this file in your GitHub repository website, then you will see that the
 Markdown is transformed into nice-looking HTML.
 
 ### Authored Assets
-
-* Example 1 Asset Name
-  - `resources/path/to/file`
-  - Your Name. Year.
-
-* Example 2 Asset Name
-  - `resources/path/to/file`
-  - Your Name. Year.
+My project does not use any local images or sounds. I used only JavaFX and CSS Styling.
 
 ### Assets Authored by Others
 
@@ -23,14 +16,27 @@ Markdown is transformed into nice-looking HTML.
 > you should list it as "Assumed proprietary: using under academic fair use."
 > instead of leaving the license information blank.
 
-* Example 1 Asset Name
-  - `resources/path/to/file`
-  - Author. Year.
-  - URL
-  - License
+* TheMealDB API
+    Free tier acess
+    TheMealDBTeam. 2024.
+    https://www.themealdb.com/
+    License Free for non commerical use with attribution
 
-* Example 2 Asset Name
-  - `resources/path/to/file`
-  - Author. Year.
-  - URL
-  - License
+* iTunes Search API
+    Public API access
+    Apple Inc, 2024.
+    https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/
+    License: Public use permitted
+
+    Libraries:
+    Gson JSON Library
+    Google. 2024.
+    https://github.com/google/gson
+License: Apache License 2.0
+
+
+
+    JavaFX
+    Oracle Corporation. 2024.
+https://openjfx.io/
+License: GPL v2 with Classpath Exception
